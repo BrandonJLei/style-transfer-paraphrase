@@ -18,7 +18,7 @@ class GPT2Generator(object):
         self.modify_args(upper_length, beam_size, top_p)
         self.config = BASE_CONFIG
         update_config(self.args, self.config)
-
+        self.args.global_dense_feature_list = "none"
         if self.args.global_dense_feature_list != "none":
 
             self.label_dict, self.reverse_label_dict = get_label_dict(data_dir)
