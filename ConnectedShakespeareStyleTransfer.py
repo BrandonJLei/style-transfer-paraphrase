@@ -2,7 +2,6 @@ import argparse
 import logging
 import sys
 import torch
-import nltk
 from style_paraphrase.inference_utils import GPT2Generator
 
     
