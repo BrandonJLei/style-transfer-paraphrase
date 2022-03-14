@@ -21,22 +21,23 @@ paraphraser = GPT2Generator(args.model_dir + "paraphraser_gpt2_large", upper_len
 print("Loading Shakespeare model...")
 shakespeare = GPT2Generator(args.model_dir + "model_299")
 
-print("\n\nNOTE: Ignore the weight mismatch error, this is due to different huggingface/transformer versions + minor modifications I did myself, shouldn't affect the paraphrases.\n\n")
 
 #input_sentence = input("Enter your sentence, q to quit: ")
 f = open("GeneratedText.txt", "r")
 text = f.read()
 f.close()
-print(text)
-paraphrased_text = ""
+print("\nGenerated: " + text + "\n")
+paraphrased_text = "\n"
 transfered_text = ""
 sentences = text.split(". ")
 for i in sentences:
     decoding = paraphraser.generate(i)
     #print("\ngreedy sample:\n{}\n".format(decoding))
     paraphrased_text += decoding
+    paraphrased_text += "\n"
     transferred_output = shakespeare.generate(decoding, top_p = args.top_p_value_2)
     transfered_text += transferred_output
+    transfered_text += "\n"
     #print("\ntransferred output:\n{}\n".format(transferred_output))
 
 print("Paraphrased: " + paraphrased_text + "\n")
