@@ -3,10 +3,9 @@ import logging
 import sys
 import torch
 import nltk
-nltk.download('punkt')
-from nltk.tokenize import sent_tokenize
 from style_paraphrase.inference_utils import GPT2Generator
 
+    
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_dir', default="", type=str)
 parser.add_argument('--top_p_value_1', default=0.1, type=float)
@@ -32,8 +31,7 @@ f.close()
 print(text)
 paraphrased_text = ""
 transfered_text = ""
-sentences = sent_tokenize(text)
-print(len(sentences))
+sentences = text.split(". ")
 for i in sentences:
     decoding = paraphraser.generate(i)
     #print("\ngreedy sample:\n{}\n".format(decoding))
